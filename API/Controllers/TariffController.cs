@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.Data;
+using API.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -7,15 +10,24 @@ namespace API.Controllers
     [ApiController]
     public class TariffController : ControllerBase
     {
-        [HttpGet] 
-        public string GetTariffs ()
+        private readonly StoreContext _context;
+
+        public TariffController(StoreContext context)
         {
-            return "List of tariffs";
+            _context = context;
+        }
+        [HttpGet] 
+        public async Task<ActionResult<List<Tariff>>> GetTariffs ()
+        {
+            List<Tariff> tariffs = await _context.Tariffs.ToListAsync();
+            return Ok(tariffs);
         }
         [HttpGet("{id}")]
-        public string GetTariff(int id)
+        public async Task<ActionResult<Tariff>> GetTariff(int id)
         {
-            return "single tariffs";
+            Tariff tariff = await _context.Tariffs.FindAsync(id);
+            return Ok(tariff);
+            return Ok();
         }
     }
 }

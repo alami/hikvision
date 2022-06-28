@@ -27,7 +27,6 @@ namespace API.Controllers
         {
             Tariff tariff = await _context.Tariffs.FindAsync(id);
             return Ok(tariff);
-            return Ok();
         }
     }
 }

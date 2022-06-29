@@ -3,6 +3,7 @@ using Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Infrastructure.Repository.IRepository;
 
 namespace API.Controllers
 {
@@ -10,22 +11,22 @@ namespace API.Controllers
     [ApiController]
     public class TariffController : ControllerBase
     {
-        private readonly StoreContext _context;
+        private readonly ITariffRepository _repo;
 
-        public TariffController(StoreContext context)
+        public TariffController(ITariffRepository repo)
         {
-            _context = context;
+            _repo = repo;
         }
         [HttpGet] 
-        public async Task<ActionResult<List<Tariff>>> GetTariffs ()
+        public async Task<ActionResult<IReadOnlyList<Tariff>>> GetTariffs ()
         {
-            List<Tariff> tariffs = await _context.Tariffs.ToListAsync();
+            IReadOnlyList <Tariff> tariffs = await _repo.GetTariffAsync();
             return Ok(tariffs);
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<Tariff>> GetTariff(int id)
         {
-            Tariff tariff = await _context.Tariffs.FindAsync(id);
+            Tariff tariff = await _repo.GetTariffByIdAsync(id);
             return Ok(tariff);
         }
     }

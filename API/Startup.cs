@@ -1,5 +1,7 @@
 using API.Data;
 using Infrastructure.Data;
+using Infrastructure.Repository;
+using Infrastructure.Repository.IRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +33,7 @@ namespace WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddScoped<ITariffRepository, TariffRepository>();
             services.AddControllers();
             services.AddDbContext<StoreContext>(x=>x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
             services.AddSwaggerGen(c =>

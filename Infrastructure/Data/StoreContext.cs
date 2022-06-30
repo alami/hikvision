@@ -9,6 +9,8 @@ namespace Infrastructure.Data
         {
         }
         public DbSet<Tariff> Tariffs { get; set; }
+        public DbSet<Resolution> Resolutions { get; set; }
+        public DbSet<Period> Periods { get; set; }
     }
 }
  

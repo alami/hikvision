@@ -1,4 +1,3 @@
-using API.Data;
 using Infrastructure.Data;
 using Infrastructure.Repository;
 using Infrastructure.Repository.IRepository;

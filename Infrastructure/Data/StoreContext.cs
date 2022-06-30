@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Infrastructure.Data
 {
@@ -11,6 +12,11 @@ namespace Infrastructure.Data
         public DbSet<Tariff> Tariffs { get; set; }
         public DbSet<Resolution> Resolutions { get; set; }
         public DbSet<Period> Periods { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
     }
 }
  

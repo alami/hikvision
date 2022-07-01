@@ -25,7 +25,7 @@ namespace Infrastructure.Data
                     }
                     context.SaveChangesAsync();
                 }
-                if (!context.Resolutions.Any())
+                if (!context.Periods.Any())
                 {
                     var periodData = File.ReadAllText("../Infrastructure/Data/SeedData/periods.json");
                     var periods = JsonSerializer.Deserialize<List<Period>>(periodData);

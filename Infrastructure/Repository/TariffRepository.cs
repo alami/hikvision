@@ -19,13 +19,13 @@ namespace Infrastructure.Repository
         }
         public async Task<IReadOnlyList<Tariff>> GetTariffsAsync()
         {
-            return await _context.Tariffs.ToListAsync();
+            return await _context.Tariffs.Include(t=>t.Resolution).Include(t=>t.Period).ToListAsync();
             
         }
 
         public async Task<Tariff> GetTariffByIdAsync(int id)
         {
-            return await _context.Tariffs.FindAsync(id);
+            return await _context.Tariffs.Include(t => t.Resolution).Include(t => t.Period).FirstOrDefaultAsync(t=>t.Id == id);
         }
 
         public async Task<IReadOnlyList<Resolution>> GetResolutionsAsync()

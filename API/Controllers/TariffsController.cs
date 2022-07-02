@@ -9,25 +9,34 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TariffController : ControllerBase
+    public class TariffsController : ControllerBase
     {
         private readonly ITariffRepository _repo;
 
-        public TariffController(ITariffRepository repo)
+        public TariffsController(ITariffRepository repo)
         {
             _repo = repo;
         }
         [HttpGet] 
         public async Task<ActionResult<IReadOnlyList<Tariff>>> GetTariffs ()
         {
-            IReadOnlyList <Tariff> tariffs = await _repo.GetTariffAsync();
+            IReadOnlyList <Tariff> tariffs = await _repo.GetTariffsAsync();
             return Ok(tariffs);
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<Tariff>> GetTariff(int id)
         {
-            Tariff tariff = await _repo.GetTariffByIdAsync(id);
-            return Ok(tariff);
+            return await _repo.GetTariffByIdAsync(id);            
+        }
+        [HttpGet("Resolutions")]
+        public async Task<ActionResult<Resolution>> GetResolutions()
+        {
+            return Ok(await _repo.GetResolutionsAsync());
+        }
+        [HttpGet("Periods")]
+        public async Task<ActionResult<Period>> GetPeriods()
+        {
+            return Ok(await _repo.GetPeriodsAsync());
         }
     }
 }

@@ -10,6 +10,8 @@ namespace Infrastructure.Repository.IRepository
     public interface ITariffRepository
     {
         Task<Tariff> GetTariffByIdAsync(int id);
-        Task<IReadOnlyList<Tariff>> GetTariffAsync();
+        Task<IReadOnlyList<Tariff>> GetTariffsAsync();
+        Task<IReadOnlyList<Resolution>> GetResolutionsAsync();
+        Task<IReadOnlyList<Period>> GetPeriodsAsync();
     }
 }

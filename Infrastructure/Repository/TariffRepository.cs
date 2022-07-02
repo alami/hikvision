@@ -17,7 +17,7 @@ namespace Infrastructure.Repository
         {
             _context = context;
         }
-        public async Task<IReadOnlyList<Tariff>> GetTariffAsync()
+        public async Task<IReadOnlyList<Tariff>> GetTariffsAsync()
         {
             return await _context.Tariffs.ToListAsync();
             
@@ -26,6 +26,16 @@ namespace Infrastructure.Repository
         public async Task<Tariff> GetTariffByIdAsync(int id)
         {
             return await _context.Tariffs.FindAsync(id);
+        }
+
+        public async Task<IReadOnlyList<Resolution>> GetResolutionsAsync()
+        {
+            return await _context.Resolutions.ToListAsync();
+        }
+
+        public async Task<IReadOnlyList<Period>> GetPeriodsAsync()
+        {
+            return await _context.Periods.ToListAsync();
         }
     }
 }
